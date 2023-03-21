@@ -1,0 +1,9 @@
+  .nav-link:hover, .nav-link:focus, .nav-link::after{
+    background-color: #fff;
+    -webkit-text-fill-color: black;
+    transition: 0.5s all linear;
+}
+.nav-link > a {
+  color: #999999;
+  text-decoration: none;
+}
