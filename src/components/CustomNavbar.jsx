@@ -74,10 +74,7 @@ function CustomNavbar(args) {
                   >
                     Log in
                   </NavLink>
-                  <Login
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                  />
+                  <Login show={modalShow} onHide={() => setModalShow(false)} />
                   <NavLink className="fs-5 col-3  text-center">
                     <Link to="/signup">Sign up</Link>
                   </NavLink>
