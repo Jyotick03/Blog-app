@@ -4,8 +4,7 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
+import Services from './pages/Services';
 
 
 function App() {
@@ -14,8 +13,7 @@ function App() {
       <Routes>
         <Route path="/" Component={Home}/>
         <Route path="/about" Component={About}/>
-        <Route path="/signup" Component={SignUp}/>
-        <Route path="/login" Component={Login}/>
+        <Route path="/services" Component={Services}/>
       </Routes>
     </BrowserRouter>
   )

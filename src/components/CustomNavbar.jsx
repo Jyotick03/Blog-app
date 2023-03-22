@@ -53,12 +53,12 @@ function CustomNavbar(args) {
                     <Link to="/about">About</Link>
                   </NavLink>
                   <NavDropdown
-                    title="Dropdown"
-                    className="col-4 text-center fs-5"
+                    title="More"
+                    className="col-3 text-center fs-5"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
+                    <NavDropdown.Item><Link to="/services" style={{textDecoration: "none", color: "black"}}>Services</Link></NavDropdown.Item>
+                    <NavDropdown.Item>
                       Another action
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
