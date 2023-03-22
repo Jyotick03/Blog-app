@@ -4,7 +4,7 @@ export default function Login(props) {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -25,9 +25,12 @@ export default function Login(props) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" required />
           </Form.Group>
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
+          <div className="container text-center">
+            <button type="submit" className="btn btn-dark">
               Submit
+            </button>
+            <button type="reset" className="btn btn-secondary ms-2">
+              Reset
             </button>
           </div>
         </Form>

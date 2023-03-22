@@ -5,30 +5,21 @@ export default function SignUp(props) {
   return (
     <Modal
       {...props}
-      size="lg"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Sign up</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Fill information to register !!</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form>
           <div className="mb-3">
-            <label>First name</label>
+            <label>Enter Name</label>
             <input
               type="text"
               className="form-control"
-              placeholder="First name"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label>Last name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Last name"
+              placeholder="Enter your full name"
               required
             />
           </div>
@@ -60,9 +51,12 @@ export default function SignUp(props) {
               required
             ></textarea>
           </div>
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Sign Up
+          <div className="container text-center">
+            <button type="submit" className="btn btn-dark">
+              Register
+            </button>
+            <button type="reset" className="btn ms-2 btn-secondary">
+              Reset
             </button>
           </div>
         </form>
