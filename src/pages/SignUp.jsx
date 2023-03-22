@@ -20,6 +20,7 @@ export default function SignUp(props) {
               type="text"
               className="form-control"
               placeholder="First name"
+              required
             />
           </div>
           <div className="mb-3">
@@ -28,6 +29,7 @@ export default function SignUp(props) {
               type="text"
               className="form-control"
               placeholder="Last name"
+              required
             />
           </div>
           <div className="mb-3">
@@ -36,6 +38,7 @@ export default function SignUp(props) {
               type="email"
               className="form-control"
               placeholder="Enter email"
+              required
             />
           </div>
           <div className="mb-3">
@@ -44,6 +47,7 @@ export default function SignUp(props) {
               type="password"
               className="form-control"
               placeholder="Enter password"
+              required
             />
           </div>
           <div className="mb-3">
@@ -53,6 +57,7 @@ export default function SignUp(props) {
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="About something"
+              required
             ></textarea>
           </div>
           <div className="d-grid">
