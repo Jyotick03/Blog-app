@@ -1,13 +1,11 @@
 import React from "react";
 import {
-  Form,
   Nav,
   Navbar,
   NavbarBrand,
   NavLink,
   OffcanvasTitle,
 } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -15,9 +13,11 @@ import { Link } from "react-router-dom";
 import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import "./CustomNavbar.css";
 import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 
 function CustomNavbar(args) {
   const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow1, setModalShow1] = React.useState(false);
   return (
     <>
       {["lg"].map((expand) => (
@@ -75,9 +75,16 @@ function CustomNavbar(args) {
                     Log in
                   </NavLink>
                   <Login show={modalShow} onHide={() => setModalShow(false)} />
-                  <NavLink className="fs-5 col-3  text-center">
-                    <Link to="/signup">Sign up</Link>
+                  <NavLink
+                    className="fs-5 col-3  text-center"
+                    onClick={() => setModalShow1(true)}
+                  >
+                    Sign Up
                   </NavLink>
+                  <SignUp
+                    show={modalShow1}
+                    onHide={() => setModalShow1(false)}
+                  />
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
