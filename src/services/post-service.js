@@ -1,4 +1,4 @@
-import { privateAxios } from "./helper";
+import { myAxios, privateAxios } from "./helper";
 
 export const doCreatePost = (postData) => {
   return privateAxios
@@ -8,3 +8,7 @@ export const doCreatePost = (postData) => {
     )
     .then((response) => response.data);
 };
+
+export const loadAllPosts = (pageNumber, pageSize) =>{
+  return myAxios.get(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`).then((response) => response.data);
+}
