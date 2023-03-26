@@ -1,4 +1,8 @@
 body {
-  background: #0D1117;
+  background: #0D1117!important;
   /* -webkit-text-fill-color: #fff; */
+}
+li.page-item.active > .page-link{
+  background-color: #000000c1!important;
+  border-color: #000000c1!important;
 }

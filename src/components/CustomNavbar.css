@@ -1,5 +1,5 @@
 .nav-link:hover,
-.nav-link:focus,
+/* .nav-link:focus, */
 .nav-link::after {
   background-color: #fff;
   -webkit-text-fill-color: black;

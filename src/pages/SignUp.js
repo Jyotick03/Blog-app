@@ -148,7 +148,7 @@ export default function SignUp(props) {
               Register
             </Button>
             <Button
-            className="rounded-1"
+              className="rounded-1"
               type="reset"
               variant="danger ms-2"
               onClick={handleResetData}

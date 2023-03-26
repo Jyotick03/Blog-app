@@ -13,7 +13,7 @@ const AddPost = () => {
   const [post, setPost] = useState({
     title: "",
     content: "",
-    categoryId: "",
+    categoryId: 0,
   });
   useEffect(() => {
     setUser(getCurrentUserDetail());
@@ -37,15 +37,15 @@ const AddPost = () => {
   const createPost = (event) => {
     event.preventDefault();
     if (post.title.trim() === "") {
-      alert("Please enter a title !");
+      toast.error("Please enter a title !");
       return;
     }
     if (post.content.trim() === "") {
-      alert("Please write something in content !");
+      toast.error("Please write something in content !");
       return;
     }
     if (post.categoryId === "") {
-      alert("Please select from a category !");
+      toast.error("Please select from a category !");
       return;
     }
 
@@ -53,12 +53,16 @@ const AddPost = () => {
     post["userId"] = user.id;
     doCreatePost(post)
       .then((data) => {
-        alert("Post created successfully !");
         toast.success("Post created successfully !");
-        console.log(post);
+        // console.log(post);
+        setPost({
+          title: "",
+          content: "",
+          categoryId: 0,
+        });
       })
       .catch((error) => {
-        alert("Error");
+        toast.error("Error");
         console.log(error);
       });
   };
@@ -78,7 +82,6 @@ const AddPost = () => {
           <FormGroup className="mb-3 mt-2">
             <Form.Label>Post title :</Form.Label>
             <Form.Control
-              for="title"
               name="title"
               placeholder="Post title"
               type="text"

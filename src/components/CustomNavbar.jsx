@@ -43,6 +43,7 @@ function CustomNavbar() {
       {["lg"].map((expand) => (
         <Navbar
           key={expand}
+          sticky="top"
           bg="dark"
           variant="dark"
           expand={expand}

@@ -1,13 +1,16 @@
-import React from 'react'
-import Base from '../components/Base'
+import React from "react";
+import { Container } from "react-bootstrap";
+import Base from "../components/Base";
+import NewFeed from "../components/NewFeed";
 
 const Home = () => {
   return (
     <Base>
-      <h1>This is the home page.</h1>
-      <p>Welcome to home page...</p>
+      <Container>
+        <NewFeed mt-3 />
+      </Container>
     </Base>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
