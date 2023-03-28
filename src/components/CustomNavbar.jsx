@@ -40,44 +40,47 @@ function CustomNavbar() {
 
   return (
     <>
-      {["lg"].map((expand) => (
+      
         <Navbar
-          key={expand}
+          key="lg"
           sticky="top"
           bg="dark"
           variant="dark"
-          expand={expand}
+          expand="lg"
           className="mb-3"
-          style={{boxShadow : "0 8px 6px -6px white"}}
+          style={{ boxShadow: "0 8px 6px -6px white" }}
         >
           <Container lg className="bg-#181818">
             <NavbarBrand className="fs-4">Blogging-App</NavbarBrand>
-            <NavbarToggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <NavbarToggle aria-controls="offcanvasNavbar-expand-lg" />
             <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${expand}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              id="offcanvasNavbar-expand-lg"
+              aria-labelledby="`offcanvasNavbarLabel-expand-lg"
               placement="end"
             >
               <Offcanvas.Header closeButton>
-                <OffcanvasTitle id={`offcanvasNavbarLabel-expand-${expand}`}>
+                <OffcanvasTitle id="offcanvasNavbarLabel-expand-lg">
                   Blogging-App
                 </OffcanvasTitle>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="nav justify-content-center flex-grow-1 pe-3 nav-pills">
-                  <NavLink className="col-2 text-center fs-5">
-                    <Link to="/">Home</Link>
-                  </NavLink>
-                  <NavLink className="col-2 text-center fs-5">
-                    <Link to="/about">About</Link>
-                  </NavLink>
-                  <NavLink className="col-2 text-center fs-5">
-                    <Link to="/services">Services</Link>
-                  </NavLink>
+                  <Link to="/" className="nav-link col-2 text-center fs-5">
+                    Home
+                  </Link>
+                  <Link to="/about" className="nav-link col-2 text-center fs-5">
+                    About
+                  </Link>
+                  <Link
+                    to="/services"
+                    className="nav-link col-2 text-center fs-5"
+                  >
+                    Services
+                  </Link>
                   <NavDropdown
                     title="More"
                     className="col-3 text-center fs-5"
-                    id={`offcanvasNavbarDropdown-expand-${expand}`}
+                    id="offcanvasNavbarDropdown-expand-lg"
                   >
                     <NavDropdown.Item>
                       <Link
@@ -97,17 +100,19 @@ function CustomNavbar() {
                     <>
                       <Navbar.Text
                         onClick={logout}
-                        className="col-4 text-left fs-5"
+                        className="col-4 text-center fs-5"
                       >
                         <BiLogOut className="me-1" /> Log out
                       </Navbar.Text>
 
                       <Navbar.Text
                         className="col-7 text-left fs-5"
-                        style={{ cursor: "pointer"}}
+                        style={{ cursor: "pointer" }}
                       >
-                        <CgProfile className="me-1" />
-                        <Link to="/user/profile-info">{user.name}</Link>
+                        <Link to="/user/profile-info">
+                          <CgProfile className="me-1" />
+                          {user.name}
+                        </Link>
                       </Navbar.Text>
                     </>
                   )}
@@ -140,7 +145,7 @@ function CustomNavbar() {
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-      ))}
+    
     </>
   );
 }
