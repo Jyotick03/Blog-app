@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Container, Pagination } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { toast } from "react-toastify";
 import { loadAllPosts } from "../services/post-service";
 import Post from "./Post";
@@ -13,20 +14,34 @@ function NewFeed() {
     lastPage: false,
     pageNumber: "",
   });
+  const [currentPage, setCurrentPage] = useState(0);
   useEffect(() => {
-    changePage(0);
-  }, []);
+    changePage(currentPage);
+  }, [currentPage]);
   const changePage = (pageNumber = 0, pageSize = 5) => {
     loadAllPosts(pageNumber, pageSize)
       .then((data) => {
-        setPosts(data);
-        window.scroll(0, 0);
+        setPosts({
+          content: [...posts.content, ...data.content],
+          totalPages: data.totalPages,
+          totalElements: data.totalElements,
+          pageSize: data.pageSize,
+          pageNumber: data.pageNumber,
+        });
+        console.log(data);
+        // window.scroll(0, 0);
       })
       .catch((error) => {
         console.log(error);
         toast.error("Error in loading posts !");
       });
   };
+
+  const pageChangeInfinite = () => {
+    setCurrentPage(currentPage + 1);
+    console.log("Page changed to " + currentPage + "...");
+  };
+
   return (
     <>
       <Card className="rounded-1 border-0">
@@ -39,10 +54,22 @@ function NewFeed() {
           <Card.Header className="shadow-lg">
             <Card.Title>Blogs Count ({posts?.totalElements})</Card.Title>
           </Card.Header>
-          {posts.content?.map((post) => (
-            <Post post={post} key={post.postId} />
-          ))}
-          <Container className="mt-3">
+          <InfiniteScroll
+            dataLength={posts?.content.length}
+            next={pageChangeInfinite}
+            hasMore={posts.totalPages === posts.pageNumber ? false : true}
+            loader={<h4>Loading...</h4>}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
+            {posts.content?.map((post) => (
+              <Post post={post} key={post.postId} />
+            ))}
+          </InfiniteScroll>
+          {/* <Container className="mt-3">
             <Pagination size="lg" className="justify-content-center">
               <Pagination.First
                 onClick={() => changePage(0)}
@@ -74,7 +101,7 @@ function NewFeed() {
                 disabled={posts.pageNumber === posts.totalPages - 1}
               />
             </Pagination>
-          </Container>
+          </Container> */}
         </Card.Body>
       </Card>
     </>

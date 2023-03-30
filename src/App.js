@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import UserDashboard from "./user-routes/UserDashboard";
 import ProfileInfo from "./user-routes/ProfileInfo";
 import PostPage from "./user-routes/PostPage";
+import Category from "./components/Category";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="profile-info" Component={ProfileInfo} />
         </Route>
         <Route path="/posts/:postId" Component={PostPage} />
+        <Route path="/categories/:categoryId/posts" Component={Category} />
       </Routes>
     </BrowserRouter>
   );

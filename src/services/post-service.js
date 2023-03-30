@@ -9,6 +9,18 @@ export const doCreatePost = (postData) => {
     .then((response) => response.data);
 };
 
+export const uploadImagePost = (image, postId) => {
+  let formData = new FormData();
+  formData.append("image", image);
+  return privateAxios
+    .post(`/post/image/upload/${postId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+
 export const loadAllPosts = (pageNumber, pageSize) => {
   return myAxios
     .get(
@@ -26,3 +38,7 @@ export const createComment = (comment, postId) => {
     .post(`/post/${postId}/comments`, comment)
     .then((response) => response.data);
 };
+
+export const loadPostCategoryWise = (categoryId) => {
+  return myAxios.get(`/category/${categoryId}/posts`, categoryId).then((response) => response.data)
+}

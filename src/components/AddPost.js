@@ -4,7 +4,7 @@ import { Button, Card, Container, Form, FormGroup } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { getCurrentUserDetail } from "../authentication";
 import { loadAllCategories } from "../services/category-service";
-import { doCreatePost } from "../services/post-service";
+import { doCreatePost, uploadImagePost } from "../services/post-service";
 
 const AddPost = () => {
   const editor = useRef(null);
@@ -15,6 +15,7 @@ const AddPost = () => {
     content: "",
     categoryId: 0,
   });
+  const [image, setImage] = useState(null);
   useEffect(() => {
     setUser(getCurrentUserDetail());
     loadAllCategories()
@@ -51,27 +52,47 @@ const AddPost = () => {
 
     //Submit the form
     post["userId"] = user.id;
-    doCreatePost(post)
-      .then((data) => {
-        toast.success("Post created successfully !");
-        // console.log(post);
-        setPost({
-          title: "",
-          content: "",
-          categoryId: 0,
+    if (image != null) {
+      doCreatePost(post)
+        .then((data) => {
+          uploadImagePost(image, data.postId)
+            .then((data) => {
+              console.log("Image uploaded successfully !");
+            })
+            .catch((error) => {
+              console.log(error);
+              toast.error("Error in uploading image !");
+            });
+          toast.success("Post created successfully !");
+          console.log(post);
+          setPost({
+            title: "",
+            content: "",
+            categoryId: 0,
+          });
+          setImage(null);
+        })
+        .catch((error) => {
+          toast.error("Error");
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        toast.error("Error");
-        console.log(error);
-      });
+    } else
+      return toast.error(
+        "Please correct all details before uploading the post !"
+      );
+    // if(image === null) toast.error("Please correct before the post !")
   };
   const handleReset = () => {
     setPost({
       title: "",
       content: "",
+      imageName: "",
       categoryId: "",
     });
+  };
+
+  const handleFileChange = (event) => {
+    setImage(event.target.files[0]);
   };
 
   return (
@@ -90,20 +111,24 @@ const AddPost = () => {
           </FormGroup>
           <FormGroup className="mb-3">
             <Form.Label>Post content :</Form.Label>
-            {/* <Form.Control
-              for="title"
-              placeholder="Post content"
-              as="textarea"
-              value=""
-              required
-              style={{ height: "200px" }}
-            /> */}
+
             <JoditEditor
               ref={editor}
               value={post.content}
               onChange={contentFieldChanged}
             />
           </FormGroup>
+          <Form.Group className="mb-3">
+            <Form.Label for="image">Upload your post banner</Form.Label>
+            <Form.Control
+              id="image"
+              accept="image/*"
+              type="file"
+              onChange={handleFileChange}
+              multiple
+              required
+            />
+          </Form.Group>
           <FormGroup>
             <Form.Label>Category :</Form.Label>
             <Form.Control
