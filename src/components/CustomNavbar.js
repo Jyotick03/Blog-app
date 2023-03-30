@@ -15,7 +15,7 @@ import "./CustomNavbar.css";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import { getCurrentUserDetail, isLoggedIn } from "../authentication";
-import { doLogout } from "./../authentication/index";
+import { doLogout } from "../authentication/index";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOut } from "react-icons/bi";
 
