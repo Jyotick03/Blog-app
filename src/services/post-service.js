@@ -40,5 +40,13 @@ export const createComment = (comment, postId) => {
 };
 
 export const loadPostCategoryWise = (categoryId) => {
-  return myAxios.get(`/category/${categoryId}/posts`, categoryId).then((response) => response.data)
+  return privateAxios.get(`/category/${categoryId}/posts`, categoryId).then((response) => response.data)
+}
+
+export const loadPostUserWise = (userId) => {
+  return privateAxios.get(`/user/${userId}/posts`).then((response) => response.data)
+}
+
+export const deletePostService = (postId) => {
+  return privateAxios.delete(`/posts/${postId}`).then((response) => response.data)
 }
