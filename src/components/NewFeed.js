@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Card, Container, Pagination } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { toast } from "react-toastify";
-import { loadAllPosts } from "../services/post-service";
+import { deletePostService, loadAllPosts, loadPostUserWise } from "../services/post-service";
 import Post from "./Post";
+import { getCurrentUserDetail } from "../authentication";
 
 function NewFeed() {
   const [posts, setPosts] = useState({
@@ -42,6 +43,25 @@ function NewFeed() {
     console.log("Page changed to " + currentPage + "...");
   };
 
+  const loadUserPost = () => {
+    loadPostUserWise(getCurrentUserDetail().id)
+      .then((data) => {
+        setPosts([...data]);
+        console.log(posts);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const deletePostById = (posts) => {
+    deletePostService(posts.postId).then(response => {
+      toast.success("Post deleted successfully !")
+     loadUserPost()
+    }).catch(error => {
+      console.log(error)
+      toast.error("Error deleting post !")
+    })
+  }
+
   return (
     <>
       <Card className="rounded-1 border-0">
@@ -66,7 +86,7 @@ function NewFeed() {
             }
           >
             {posts.content?.map((post) => (
-              <Post post={post} key={post.postId} />
+              <Post post={post} deletePost={deletePostById} key={post.postId} />
             ))}
           </InfiniteScroll>
           {/* <Container className="mt-3">
