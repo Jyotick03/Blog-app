@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { doLogin } from "../authentication";
 import { loginUser } from "../services/user-service";
+import userContext from "../context/userContext";
+import { useContext } from "react";
 
 export default function Login(props) {
+  const userContextData = useContext(userContext);
   const navigate = useNavigate();
   const [loginDetail, setLoginDetail] = useState({
     userName: "",
@@ -39,12 +42,16 @@ export default function Login(props) {
 
     loginUser(loginDetail)
       .then((data) => {
-        toast.success("Login successful !!");
         console.log(data);
         doLogin(data, () => {
           console.log("Data successfully saved in local-storage.");
+          userContextData?.setUser({
+            data: data.user,
+            login: true,
+          });
           navigate("/user/dashboard");
         });
+        toast.success("Login successful !!");
       })
       .catch((error) => {
         console.log(error);
@@ -105,7 +112,12 @@ export default function Login(props) {
             <Button className="rounded-1" type="Login" variant="dark">
               Login
             </Button>
-            <Button className="rounded-1" onClick={handleReset} type="reset" variant="danger ms-2">
+            <Button
+              className="rounded-1"
+              onClick={handleReset}
+              type="reset"
+              variant="danger ms-2"
+            >
               Reset
             </Button>
           </Container>

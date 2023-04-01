@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getCurrentUserDetail, isLoggedIn } from "../authentication";
+import userContext from "../context/userContext";
 
 function Post({
   post = {
@@ -10,6 +11,7 @@ function Post({
   },
   deletePost,
 }) {
+  const userContextData = useContext(userContext);
   const [user, setUser] = useState(null);
   const [login, setLogin] = useState(null);
 
@@ -32,7 +34,16 @@ function Post({
         >
           Read more
         </Link>
-        {login && user.id === post.user.id ? (
+        {userContextData?.user.login && login && user.id === post.user.id ? (
+          <Link to={"/user/update/" + post.postId}
+            className="btn btn-warning rounded-1 ms-2 mt-2"
+          >
+            Update
+          </Link>
+        ) : (
+          " "
+        )}
+        {userContextData?.user.login && login && user.id === post.user.id ? (
           <Button
             onClick={() => deletePost(post)}
             className="rounded-1 ms-2 mt-2"

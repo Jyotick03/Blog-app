@@ -12,29 +12,35 @@ import UserDashboard from "./user-routes/UserDashboard";
 import ProfileInfo from "./user-routes/ProfileInfo";
 import PostPage from "./user-routes/PostPage";
 import Category from "./components/Category";
+import UserProvider from "./context/UserProvider";
+import UpdatePost from "./components/UpdatePost";
 
 function App() {
   return (
-    <BrowserRouter>
-      <ToastContainer
-        toastStyle={{
-          backgroundColor: "black",
-          WebkitTextFillColor: "#fff",
-        }}
-        position="bottom-center"
-      />
-      <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/about" Component={About} />
-        <Route path="/services" Component={Services} />
-        <Route path="/user" Component={PrivateRoute}>
-          <Route path="dashboard" Component={UserDashboard} />
-          <Route path="profile-info" Component={ProfileInfo} />
-        </Route>
-        <Route path="/posts/:postId" Component={PostPage} />
-        <Route path="/categories/:categoryId/posts" Component={Category} />
-      </Routes>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <ToastContainer
+          toastStyle={{
+            backgroundColor: "black",
+            WebkitTextFillColor: "#fff",
+          }}
+          position="bottom-center"
+        />
+        <Routes>
+          <Route path="/" Component={Home} />
+          <Route path="/about" Component={About} />
+          <Route path="/services" Component={Services} />
+          <Route path="/user" Component={PrivateRoute}>
+            <Route path="dashboard" Component={UserDashboard} />
+            <Route path="profile-info" Component={ProfileInfo} />
+            <Route path="update/:postId" Component={UpdatePost} />
+          </Route>
+          <Route path="/posts/:postId" Component={PostPage} />
+    
+          <Route path="/categories/:categoryId/posts" Component={Category} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
