@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { toast } from "react-toastify";
-import { deletePostService, loadAllPosts, loadPostUserWise } from "../services/post-service";
+import {
+  deletePostService,
+  loadAllPosts,
+  loadPostUserWise,
+} from "../services/post-service";
 import Post from "./Post";
 import { getCurrentUserDetail } from "../authentication";
+import { useNavigate } from "react-router-dom";
 
 function NewFeed() {
+  const navigate = useNavigate()
   const [posts, setPosts] = useState({
     content: [],
     totalPages: "",
@@ -53,14 +59,16 @@ function NewFeed() {
   };
 
   const deletePostById = (posts) => {
-    deletePostService(posts.postId).then(response => {
-      toast.success("Post deleted successfully !")
-     loadUserPost()
-    }).catch(error => {
-      console.log(error)
-      toast.error("Error deleting post !")
-    })
-  }
+    deletePostService(posts.postId)
+      .then((response) => {
+        toast.success("Post deleted successfully !");
+        loadUserPost();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error deleting post !");
+      });
+  };
 
   return (
     <>
@@ -75,7 +83,7 @@ function NewFeed() {
             <Card.Title>Blogs Count ({posts?.totalElements})</Card.Title>
           </Card.Header>
           <InfiniteScroll
-            dataLength={posts?.content.length}
+            dataLength={posts?.content?.length}
             next={pageChangeInfinite}
             hasMore={posts.totalPages === posts.pageNumber ? false : true}
             loader={<h4>Loading...</h4>}

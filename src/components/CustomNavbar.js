@@ -41,6 +41,7 @@ function CustomNavbar() {
         data: null,
         login: false,
       });
+      
       navigate("/");
     });
   };
@@ -83,7 +84,13 @@ function CustomNavbar() {
                 >
                   Services
                 </Link>
-                <NavDropdown
+                <Link
+                  to="/user/dashboard"
+                  className="nav-link col-3 text-center fs-5"
+                >
+                  Dashboard
+                </Link>
+                {/* <NavDropdown
                   title="More"
                   className="col-3 text-center fs-5"
                   id="offcanvasNavbarDropdown-expand-lg"
@@ -99,7 +106,7 @@ function CustomNavbar() {
                   <NavDropdown.Item>Youtube</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>facebook</NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
               </Nav>
               <Nav className="nav justify-content-end flex-grow-1 pe-3 nav-pills">
                 {login && (
@@ -115,7 +122,7 @@ function CustomNavbar() {
                       className="col-7 text-left fs-5"
                       style={{ cursor: "pointer" }}
                     >
-                      <Link to="/user/profile-info">
+                      <Link to={"/user/" + userContextData?.user.data.id}>
                         <CgProfile className="me-1" />
                         {user.name}
                       </Link>

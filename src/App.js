@@ -32,7 +32,7 @@ function App() {
           <Route path="/services" Component={Services} />
           <Route path="/user" Component={PrivateRoute}>
             <Route path="dashboard" Component={UserDashboard} />
-            <Route path="profile-info" Component={ProfileInfo} />
+            <Route path=":userId" Component={ProfileInfo} />
             <Route path="update/:postId" Component={UpdatePost} />
           </Route>
           <Route path="/posts/:postId" Component={PostPage} />
