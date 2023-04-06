@@ -129,7 +129,6 @@ export default function UpdateUser(props) {
             <Button type="submit" className="rounded-1" variant="dark">
               Submit
             </Button>
-            {JSON.stringify(data)}
           </Container>
         </Form>
       </Modal.Body>
