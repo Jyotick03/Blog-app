@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
-import { useContext } from "react";
-import userContext from "../context/userContext";
 import ProfileImg from "../assets/profileImg.jpg";
 import { useEffect } from "react";
 import { getCurrentUserDetail, isLoggedIn } from "../authentication";
 import { useState } from "react";
+import UpdateUser from "../pages/UpdateUser";
 
 const ViewUserProfile = ({ user }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [modalShow, setModalShow] = React.useState(false);
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
@@ -16,6 +16,7 @@ const ViewUserProfile = ({ user }) => {
     console.log(getCurrentUserDetail());
     setLogin(isLoggedIn());
   }, []);
+
   return (
     <Container>
       <Card className="mt-5 rounded-1">
@@ -96,7 +97,8 @@ const ViewUserProfile = ({ user }) => {
                 </div>
                 {login && user.id === currentUser.id ? (
                   <Container className="mt-3 mb-3 text-center">
-                    <Button variant="warning">Profile Update</Button>
+                    <Button variant="warning" onClick={() => setModalShow(true)}>Profile Update</Button>
+                    <UpdateUser show={modalShow} onHide={() => setModalShow(false)}/>
                   </Container>
                 ) : (
                   " "
